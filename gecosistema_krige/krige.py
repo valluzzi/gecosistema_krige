@@ -25,38 +25,38 @@
 import os
 from .filesystem import *
 from gecosistema_erre import *
-
 #AUTO|UK|UK-AutoKrige|OK|OK-ADVANCED|IDW2
+
 def Kriging(fileshp, filetif=None, formula="VALUE~1", method="OK", pixelsize=10, psill=1.0, range=900,
             nugget=1.0, buffer=0, RemoveNegativeValues=False, verbose=False):
     """
     Kriging
     """
+    #fileshp, filetif, sformula, method, pixelsize, psill, range, nugget, buffer = 0, RemoveNeg
     filetif = filetif if filetif else forceext(fileshp, "tif")
     env = {
         "fileshp": fileshp.replace("/", "\\"),
         "filetif": filetif.replace("/", "\\"),
         "sformula": formula,
         "method": method,
+        "pixelsize": pixelsize,
         "psill": psill,
         "range": range,
         "nugget": nugget,
-        "pixelsize": pixelsize,
         "buffer": buffer,
-        "RemoveNegativeValues": RemoveNegativeValues,
-        "scriptdir": justpath(__file__).replace('/', '\\') + "\\R"
+        "RemoveNegativeValues": RemoveNegativeValues
     }
-    cmd = sformat(
-        """"{scriptdir}\\qkrige_v4.r" "{fileshp}" "{filetif}" "{sformula}" "{method}" "{pixelsize}" "{psill}" "{range}" "{nugget}" "{buffer}" "{RemoveNegativeValues}" """,
-        env)
 
-    response = Rscript(cmd, verbose=verbose)
+    cmd =  justpath(__file__)+"\\R\\qkrige_v4.r"
+    cmd =  cmd.replace('/', '\\')
+
+    response = Rscript(cmd, env, envAsArgs=False, verbose=verbose)
     filetif = response["data"] if response and "data" in response else ""
     return filetif
 
 if __name__ =="__main__":
+    workdir = r"D:\Program Files (x86)\GECOMAP0\apps\awesome\data\SIMS\GFS\SO2\L1HR"
+    os.chdir(workdir)
+    fileshp = r"conc SO2.shp"
 
-    workdir = r"D:\Users\vlr20\Projects\GitHub\gecosistema_feflow\gecosistema_feflow\FeFlow\results"
-    chdir(workdir)
-    fileshp = "okrige-858894-2015-08-01.shp"
-    Kriging(fileshp,verbose=True)
+    print Kriging(fileshp,method="IDW2",pixelsize=250,verbose=True)

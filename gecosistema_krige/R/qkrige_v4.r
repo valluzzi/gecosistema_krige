@@ -231,18 +231,20 @@ Main <- function(){
 		filetif = Kriging(fileshp, filetif, sformula, method, pixelsize, psill, range, nugget, buffer=0, RemoveNegativeValues=FALSE)
 	}
 	if (length(args)==10){
+
+		Sys.getenv()
+
+		fileshp		  = Sys.getenv("FILESHP")
+		filetif		  = Sys.getenv("FILETIF")
+		sformula      = Sys.getenv("SFORMULA")
+		method		  = Sys.getenv("METHOD")  #AUTO|UK|UK-AutoKrige|OK|OK-ADVANCED|IDW2
+		pixelsize     = as.numeric(Sys.getenv("PIXELSIZE"))
 		
-		fileshp		  = args[1]
-		filetif		  = args[2]
-		sformula    = args[3]
-		method		  = args[4]  #AUTO|UK|UK-AutoKrige|OK|OK-ADVANCED|IDW2
-		pixelsize   = as.numeric(args[5])
-		
-		psill       = as.numeric(args[6])
-		range       = as.numeric(args[7])
-		nugget      = as.numeric(args[8])
-		buffer      = as.numeric(args[9])
-		RemoveNegativeValues = as.logical(args[10]) #remove non-sense negative values caused by interpolation
+		psill         = as.numeric(Sys.getenv("PSILL"))
+		range         = as.numeric(Sys.getenv("RANGE"))
+		nugget        = as.numeric(Sys.getenv("NUGGET"))
+		buffer        = as.numeric(Sys.getenv("BUFFER"))
+		RemoveNegativeValues = as.logical(Sys.getenv("REMOVENEGATIVEVALUES")) #remove non-sense negative values caused by interpolation
 
 		#print(fileshp)
 		#print(method)
