@@ -50,8 +50,8 @@ def Kriging(fileshp, filetif=None, formula="VALUE~1", method="OK", pixelsize=10,
         """"{scriptdir}\\qkrige_v4.r" "{fileshp}" "{filetif}" "{sformula}" "{method}" "{pixelsize}" "{psill}" "{range}" "{nugget}" "{buffer}" "{RemoveNegativeValues}" """,
         env)
 
-    filetif = Rscript(cmd, verbose=verbose)
-    filetif = filetif.strip('"')
+    response = Rscript(cmd, verbose=verbose)
+    filetif = response["data"] if response and "data" in response else ""
     return filetif
 
 if __name__ =="__main__":
