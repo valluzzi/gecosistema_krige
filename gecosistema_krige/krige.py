@@ -22,8 +22,19 @@
 #
 # Created:
 #-------------------------------------------------------------------------------
-from gecosistema_core import *
+import os
+from gecosistema_erre import *
 
+def forceext(pathname, newext):
+    """
+    forceext
+    """
+    (root, _) = os.path.splitext((pathname))
+    pathname = root + ("." + newext if len(newext.strip()) > 0 else "")
+    return (pathname)
+
+
+#AUTO|UK|UK-AutoKrige|OK|OK-ADVANCED|IDW2
 def Kriging(fileshp, filetif=None, formula="VALUE~1", method="OK", pixelsize=10, psill=1.0, range=900,
             nugget=1.0, buffer=0, RemoveNegativeValues=False, verbose=False):
     """
