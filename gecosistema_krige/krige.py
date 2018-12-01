@@ -23,39 +23,8 @@
 # Created:
 #-------------------------------------------------------------------------------
 import os
+from .filesystem import *
 from gecosistema_erre import *
-
-def normpath(pathname):
-    """
-    normpath
-    """
-    if not pathname:
-        return ""
-    return os.path.normpath(pathname.replace("\\", "/")).replace("\\", "/")
-
-def justdrive(pathname):
-    """
-    justdrive - ritorna il drive o ptotocollo http: ftp: ... del url
-    """
-    arr = normpath(pathname).split("/", 2)
-    return arr[0] if len(arr) > 1 else ""
-
-def justpath(pathname, n=1):
-    """
-    justpath
-    """
-    for j in range(n):
-        (pathname, _) = os.path.split(normpath(pathname))
-    return normpath(pathname)
-
-def forceext(pathname, newext):
-    """
-    forceext
-    """
-    (root, _) = os.path.splitext(normpath(pathname))
-    pathname = root + ("." + newext if len(newext.strip()) > 0 else "")
-    return normpath(pathname)
-
 
 #AUTO|UK|UK-AutoKrige|OK|OK-ADVANCED|IDW2
 def Kriging(fileshp, filetif=None, formula="VALUE~1", method="OK", pixelsize=10, psill=1.0, range=900,
