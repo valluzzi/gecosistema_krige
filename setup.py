@@ -20,7 +20,7 @@ setuptools.setup(
     url="https://github.com/valluzzi/gecosistema_krige.git",
     packages=setuptools.find_packages(),
     package_data={
-          "gecosistema_krige": ["R/qkrige_v4.r"]
+          "gecosistema_krige": ["R/qkrige_v4.1.r"]
     },
     classifiers=(
         "Programming Language :: Python :: 2",
