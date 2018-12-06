@@ -47,7 +47,7 @@ def Kriging(fileshp, filetif=None, formula="VALUE~1", method="OK", pixelsize=10,
         "RemoveNegativeValues": RemoveNegativeValues
     }
 
-    cmd =  justpath(__file__)+"\\R\\qkrige_v4.r"
+    cmd =  justpath(__file__)+"\\R\\qkrige_v4.1.r"
     cmd =  cmd.replace('/', '\\')
 
     response = Rscript(cmd, env, envAsArgs=False, verbose=verbose)
