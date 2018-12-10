@@ -218,17 +218,18 @@ Main <- function(){
 	filetif = ""
 	if (length(args)==0){
 		
-		setwd("D:\\Users\\vlr20\\Projects\\GitHub\\gecosistema_feflow\\gecosistema_feflow\\FeFlow\\results")
-		fileshp		= "okrige-858894-2015-08-01.shp"
+		setwd("c:\\Users\\vlr20\\Dektop\\FeFlow\\results")
+		fileshp		= "okrige-759066-2015-08-01.shp"
 		filetif   = forceext(fileshp,"tif")
 	
-		method = "AUTO" 
+		method = "OK"
 		sformula ="value~1"
 		psill = 1
 		range = 900
 		nugget = 1
 		pixelsize=10
-		filetif = Kriging(fileshp, filetif, sformula, method, pixelsize, psill, range, nugget, buffer=0, RemoveNegativeValues=FALSE)
+		buffer = 5000
+		filetif = Kriging(fileshp, filetif, sformula, method, pixelsize, psill, range, nugget, buffer, RemoveNegativeValues=FALSE)
 	}
 	if (length(args)==10){
 
